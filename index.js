@@ -16,3 +16,14 @@ const limparFormulario = () => {
 // Verifica se o CEP é válido
 
 const eNumero = (numero) => /^[0-9]+$/.test(numero);
+const cepValido = (cep) => cep.lenght == 8 && eNumero(cep);
+
+// essa parte faz o preenchimento dos campos de acordo com o CEP digitado, pegando as informações da API
+
+const preencherFormulario = (endereco) => {
+    document.getElementById('logradouro').value = endereco.logradouro;
+    document.getElementById('localidade').value = endereco.localidade;
+    document.getElementById('bairro').value = endereco.bairro;
+    document.getElementById('uf').value = endereco.uf;
+
+}
