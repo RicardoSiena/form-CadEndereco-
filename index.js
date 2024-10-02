@@ -1,54 +1,47 @@
-'use strict'; //ativa o modo restrito
-// Este modo faz com que o javascript opera de forma mais segura e rigorosa, ajudando a evitar erros comuns de programação.
-/* consumo de API - https://viacep.com.br/ */
+'use strict'; // ativa o modo restrito
+// esse modo faz com o que o JavaScript opere dde forma mais segura e rigorosa, ajudando a evitar erros comuns de programação
+/* Consumo de API https://viacep.com.br/ */
  
-//função para limpar campos preenchidos
-
+// FUNÇÃO PARA LIMPAR OS CAMPOS PREENCHIDOS
 const limparFormulario = () => {
-    document.getElementById ('logradouro').value = '';
-    document.getElementById ('bairro').value = '';
-    document.getElementById ('localidade').value = '';
-    document.getElementById ('uf').value = '';
-    document.getElementById ('numero').value = '';
-    document.getElementById ('complemento').value = '';
+    document.getElementById('logradouro').value = '';
+    document.getElementById('bairro').value = '';
+    document.getElementById('localidade').value = '';
+    document.getElementById('uf').value = '';
+    document.getElementById('numero').value = '';
+    document.getElementById('complemento').value = '';
 }
-
-// Verifica se o CEP é válido
-
+ 
+// verifica se o cep é válido
 const eNumero = (numero) => /^[0-9]+$/.test(numero);
-const cepValido = (cep) => cep.lenght == 8 && eNumero(cep);
-
-// essa parte faz o preenchimento dos campos de acordo com o CEP digitado, pegando as informações da API
-
+const cepValido = (cep) => cep.length == 8 && eNumero(cep);  //verifica se a quantidade de caracteres dentro de CEP é igual á 8
+ 
+// função responsável por preencher o formulário com as informações da API
 const preencherFormulario = (endereco) => {
     document.getElementById('logradouro').value = endereco.logradouro;
-    document.getElementById('localidade').value = endereco.localidade;
     document.getElementById('bairro').value = endereco.bairro;
+    document.getElementById('localidade').value = endereco.localidade;
     document.getElementById('uf').value = endereco.uf;
-
 }
-
- // Função para consumo de API ViaCEP
-
-const pesquisarCep = async () => {
-    limparFormulario();
+ 
+// Função para consumo de API ViaCEP
+const pesquisarCep = async() => {   //principal função que será executada quando for preencher o formúlario
+    limparFormulario();   //função para deixar o formúlario em branco para ser preenchido
     const url = `http://viacep.com.br/ws/${cep.value}/json/`;
  
-    if (cepValido(cep.value)) {
-        const dados = await fetch(url);
-        const addres = await dados.json();
+    if(cepValido(cep.value)){
+        const dados = await fetch(url);  //fetch requisição do viacep e await garante que o feitch responda corretamente no formúlario
+        const addres = await dados.json(); //garante que o formato seja json
  
-        if (addres.hasOwnProperty('erro')) {
-            alert('CEP não encontrado');
-        } else {
-            preencherformulario(addres);
+        if(addres.hasOwnProperty('erro')){ //verifica se tem erro no CEP
+            alert('CEP não encontrado ')
+        }else{
+            preencherFormulario(addres);
         }
- 
-    } else {
+    }else{
         alert('CEP Incorreto');
     }
 }
  
-// Chama escutador  para disparar ação de preenchimento
-document.getElementById('cep').addEventListener('focusout', pesquisarCep);
-
+// chama escutador para disparar ação de preenchimento
+document.getElementById('cep').addEventListener('focusout', pesquisarCep); //adiciona escutador de eventos
