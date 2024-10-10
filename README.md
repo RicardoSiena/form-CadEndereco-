@@ -19,7 +19,11 @@ ________________________________________________________________________________
 
 ![Alt text](img/segundo.png)
 
+#### eNumero
+* verifica se o que foi digitado no campo, só possui caracteres numéricos.
 
+#### cepValido
+* verifica se o tamanho do numero digitado, é igual a 8, ou seja, o tamanho de CEPs.
 
 ____________________________________________________________________________________________________
 
