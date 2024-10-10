@@ -31,7 +31,7 @@ ________________________________________________________________________________
 
 ![Alt text](img/terceiro.png)
 
-
+* preenche os campos de acordo com o fornecido pelo API, logo após do CEP ser inserido em seu devido campo.
 
 ____________________________________________________________________________________________________
 ### CONST pesquisaCep
